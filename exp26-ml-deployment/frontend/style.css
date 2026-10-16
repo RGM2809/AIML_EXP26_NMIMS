@@ -1,0 +1,151 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(135deg, #101827, #172554, #312e81);
+    color: #f8fafc;
+    min-height: 100vh;
+    padding: 30px 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+header h1 {
+    font-size: 42px;
+    color: #a5b4fc;
+    letter-spacing: 2px;
+}
+
+header p {
+    color: #cbd5e1;
+    margin-top: 8px;
+}
+
+main {
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.intro {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.intro h2 {
+    font-size: 26px;
+    margin-bottom: 10px;
+}
+
+.intro p {
+    color: #cbd5e1;
+    line-height: 1.6;
+}
+
+.prediction-card {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 18px;
+    padding: 30px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(12px);
+}
+
+.prediction-card h2 {
+    margin-bottom: 22px;
+    color: #c7d2fe;
+}
+
+form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 18px;
+}
+
+label {
+    align-self: end;
+    color: #e2e8f0;
+    font-size: 14px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #475569;
+    border-radius: 8px;
+    background: #0f172a;
+    color: white;
+    font-size: 16px;
+    outline: none;
+}
+
+input:focus {
+    border-color: #818cf8;
+    box-shadow: 0 0 0 2px rgba(129, 140, 248, 0.2);
+}
+
+button {
+    grid-column: 1 / -1;
+    margin-top: 12px;
+    padding: 14px;
+    border: none;
+    border-radius: 9px;
+    background: linear-gradient(90deg, #6366f1, #8b5cf6);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, opacity 0.2s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    opacity: 0.92;
+}
+
+#result {
+    margin-top: 25px;
+    padding: 20px;
+    border-radius: 12px;
+    background: rgba(15, 23, 42, 0.8);
+    border: 1px solid #334155;
+}
+
+#result h3 {
+    color: #a5b4fc;
+    margin-bottom: 10px;
+}
+
+#prediction-text {
+    color: #cbd5e1;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+footer {
+    text-align: center;
+    margin-top: 35px;
+    color: #94a3b8;
+    font-size: 13px;
+}
+
+@media (max-width: 520px) {
+    form {
+        grid-template-columns: 1fr;
+    }
+
+    .prediction-card {
+        padding: 20px;
+    }
+
+    header h1 {
+        font-size: 34px;
+    }
+}

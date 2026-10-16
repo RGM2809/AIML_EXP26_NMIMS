@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iris AI | Flower Classifier</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <main class="container">
+        <header>
+            <p class="eyebrow">MACHINE LEARNING PROJECT</p>
+            <h1>Iris <span>AI</span></h1>
+            <p class="subtitle">
+                Discover the species of an Iris flower using machine learning.
+            </p>
+        </header>
+
+        <section class="card">
+            <h2>Flower Measurements</h2>
+            <p class="description">
+                Enter the four measurements in centimetres.
+            </p>
+
+            <form id="prediction-form">
+                <label for="sepal-length">Sepal Length (cm)</label>
+                <input id="sepal-length" type="number"
+                       min="0" step="any" value="5.1" required>
+
+                <label for="sepal-width">Sepal Width (cm)</label>
+                <input id="sepal-width" type="number"
+                       min="0" step="any" value="3.5" required>
+
+                <label for="petal-length">Petal Length (cm)</label>
+                <input id="petal-length" type="number"
+                       min="0" step="any" value="1.4" required>
+
+                <label for="petal-width">Petal Width (cm)</label>
+                <input id="petal-width" type="number"
+                       min="0" step="any" value="0.2" required>
+
+                <button type="submit" id="predict-button">
+                    Predict Flower Species
+                </button>
+            </form>
+
+            <div id="result" class="result" aria-live="polite">
+                Your prediction will appear here.
+            </div>
+        </section>
+
+        <footer>
+            Powered by Random Forest · Flask · Kubernetes
+        </footer>
+    </main>
+
+    <script>
+        const form = document.getElementById("prediction-form");
+        const result = document.getElementById("result");
+        const button = document.getElementById("predict-button");
+
+        form.addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            const features = [
+                Number(document.getElementById("sepal-length").value),
+                Number(document.getElementById("sepal-width").value),
+                Number(document.getElementById("petal-length").value),
+                Number(document.getElementById("petal-width").value)
+            ];
+
+            button.disabled = true;
+            button.textContent = "Predicting...";
+            result.textContent = "Analysing flower measurements...";
+
+            try {
+                const response = await fetch("/predict", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ features: features })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || "Prediction failed.");
+                }
+
+                result.innerHTML =
+                    "<p>Predicted Species</p><h2>" +
+                    data.predicted_class +
+                    "</h2><p>Prediction code: " +
+                    data.prediction_code +
+                    "</p>";
+            } catch (error) {
+                result.textContent =
+                    "Unable to predict: " + error.message;
+            } finally {
+                button.disabled = false;
+                button.textContent = "Predict Flower Species";
+            }
+        });
+    </script>
+</body>
+</html>
